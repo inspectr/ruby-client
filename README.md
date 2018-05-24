@@ -13,7 +13,12 @@ rake test
 
 # Example usage
 ```
-inspectr = Inspectr::Client.new
+Inspectr.config do |c|
+  c.access_key_id = ENV['AWS_SQS_ACCESS_KEY_ID']
+  c.secret_access_key = ENV['AWS_SQS_SECRET_ACCESS_KEY']
+  c.region = ENV['AWS_REGION']
+  c.queue_url = ENV['AWS_SQS_QUEUE_URL']
+end
 
 actor = "john@doe.com"
 
@@ -40,12 +45,12 @@ event_metadata = {
   other_field: "value"
 }
 
-inspectr.log(
+Inspectr.publish(
   actor: actor, 
   actor_metadata: actor_metadata, 
   target: target, 
   target_metadata: target_metadata, 
-  orign: origin, 
+  origin: origin,
   event: event, 
   event_metadata: event_metadata)
 ```
