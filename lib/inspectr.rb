@@ -5,7 +5,7 @@ module Inspectr
   class Client
     attr_reader :sqs, :queue_url
 
-    def self.initialize
+    def initialize
       @sqs = Aws::SQS::Client.new(
         access_key_id:     configuration.access_key_id,
         secret_access_key: configuration.secret_access_key,
@@ -22,7 +22,7 @@ module Inspectr
             })
     end
 
-    def self.configuration
+    def configuration
       Inspectr.configuration
     end
   end
