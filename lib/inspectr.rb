@@ -44,6 +44,6 @@ module Inspectr
   end
 
   def self.publish(msg)
-    client.publish(msg)
+    client.publish(msg.merge(timestamp: Time.now.utc.to_i))
   end
 end
