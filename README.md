@@ -14,11 +14,11 @@ rake test
 # Example usage
 ```
 Inspectr.config do |c|
-  c.access_key_id = ENV['AWS_SQS_ACCESS_KEY_ID']
-  c.secret_access_key = ENV['AWS_SQS_SECRET_ACCESS_KEY']
-  c.region = ENV['AWS_REGION']
-  c.queue_url = ENV['AWS_SQS_QUEUE_URL']
-  c.origin = 'My Service'
+  c.access_key_id = ENV['INSPECTR_AWS_ACCESS_KEY_ID']
+  c.secret_access_key = ENV['INSPECTR_AWS_SECRET_ACCESS_KEY']
+  c.region = ENV['INSPECTR_AWS_REGION']
+  c.queue_url = ENV['INSPECTR_AWS_SQS_QUEUE_URL']
+  c.origin = 'my-service'
 end
 
 actor = "john@doe.com"
@@ -29,11 +29,12 @@ actor_metadata = {
   id: 123
 }
 
-target = 456
+target = "jane@doe.com"
 
 target_metadata = {
   type: "user",
-  email: "bob@bob.com"
+  name: "Jane Doe"
+  id: 321
 }
 
 origin = "my_server"

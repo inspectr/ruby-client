@@ -38,9 +38,9 @@ module Inspectr
   def self.publish(message)
     msg_hash = {
       actor: message[:actor],
-      actor_metadata: message[:actor_metadata],
+      actorMetadata: message[:actor_metadata],
       target: message[:target],
-      target_metadata: message[:target_metadata],
+      targetMetadata: message[:target_metadata],
       origin: configuration.origin,
       event: message[:event],
       timestamp: Time.now.utc.to_i
