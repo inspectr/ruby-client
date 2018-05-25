@@ -1,24 +1,24 @@
 # ruby-client
 Ruby client for Inspectr
 
-# to build gem
+### to build gem
 ```
 gem build inspectr.gemspec
 ```
 
-# to run tests
+### to run tests
 ```
 rake test
 ```
 
-# Example usage
-```
+### Example usage
+```ruby
 Inspectr.config do |c|
-  c.access_key_id = ENV['INSPECTR_AWS_ACCESS_KEY_ID']
+  c.access_key_id     = ENV['INSPECTR_AWS_ACCESS_KEY_ID']
   c.secret_access_key = ENV['INSPECTR_AWS_SECRET_ACCESS_KEY']
-  c.region = ENV['INSPECTR_AWS_REGION']
-  c.queue_url = ENV['INSPECTR_AWS_SQS_QUEUE_URL']
-  c.origin = 'my-service'
+  c.region            = ENV['INSPECTR_AWS_REGION']
+  c.queue_url         = ENV['INSPECTR_AWS_SQS_QUEUE_URL']
+  c.origin            = 'service-name'
 end
 
 actor = "john@doe.com"
@@ -54,5 +54,6 @@ Inspectr.publish(
   target_metadata: target_metadata, 
   origin: origin,
   event: event, 
-  event_metadata: event_metadata)
+  event_metadata: event_metadata
+)
 ```
