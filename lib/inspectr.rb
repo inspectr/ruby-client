@@ -46,6 +46,6 @@ module Inspectr
       timestamp: Time.now.utc.to_i
     }
 
-    client.publish(msg_hash)
+    client.publish(msg_hash.to_json)
   end
 end
