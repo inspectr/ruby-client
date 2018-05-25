@@ -2,6 +2,13 @@ require 'config'
 require 'aws-sdk-sqs'
 
 module Inspectr
+  FIELDS_TO_STRINGIFY = %i(
+    actor
+    target
+    origin
+    event
+  ).freeze
+
   class Client
     MESSAGE_GROUP_ID = 'inspectr'.freeze
 
@@ -45,7 +52,13 @@ module Inspectr
       event: message[:event],
       timestamp: Time.now.utc.to_i
     }
-
+    msg_hash = stringify_message(msg_hash)
     client.publish(msg_hash.to_json)
+  end
+
+  def self.stringify_message(msg_hash)
+    msg_hash.map do |k, v|
+      [k, FIELDS_TO_STRINGIFY.include?(k) && v ? v.to_s : v]
+    end.to_h
   end
 end
