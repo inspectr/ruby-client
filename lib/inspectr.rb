@@ -3,8 +3,6 @@ require 'aws-sdk-sqs'
 
 module Inspectr
   class Client
-    attr_reader :sqs, :queue_url
-
     MESSAGE_GROUP_ID = 'inspectr'.freeze
 
     def initialize(configuration)
@@ -17,11 +15,11 @@ module Inspectr
     end
 
     def publish(msg)
-      sqs.send_message({
-              queue_url:        queue_url,
-              message_group_id: MESSAGE_GROUP_ID,
-              message_body:     msg
-            })
+      @sqs.send_message({
+        queue_url:        @queue_url,
+        message_group_id: MESSAGE_GROUP_ID,
+        message_body:     msg
+      })
     end
   end
 
@@ -37,7 +35,17 @@ module Inspectr
     @client ||= Client.new(configuration)
   end
 
-  def self.publish(msg)
-    client.publish(msg.merge(timestamp: Time.now.utc.to_i))
+  def self.publish(message)
+    msg_hash = {
+      actor: message[:actor],
+      actor_metadata: message[:actor_metadata],
+      target: message[:target],
+      target_metadata: message[:target_metadata],
+      origin: configuration.origin,
+      event: message[:event],
+      timestamp: Time.now.utc.to_i
+    }
+
+    client.publish(msg_hash)
   end
 end

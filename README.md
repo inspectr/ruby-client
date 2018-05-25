@@ -18,6 +18,7 @@ Inspectr.config do |c|
   c.secret_access_key = ENV['AWS_SQS_SECRET_ACCESS_KEY']
   c.region = ENV['AWS_REGION']
   c.queue_url = ENV['AWS_SQS_QUEUE_URL']
+  c.origin = 'My Service'
 end
 
 actor = "john@doe.com"
